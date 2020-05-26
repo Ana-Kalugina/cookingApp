@@ -11,7 +11,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="ZoL-Rd-6wh">
             <objects>
-                <viewController id="Vdw-Cg-ESA" customClass="WelcomeViewController" customModule="CookingApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="welcomeVC" id="Vdw-Cg-ESA" customClass="WelcomeViewController" customModule="CookingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nbn-UU-IHn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -26,7 +26,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Skip"/>
                                 <connections>
-                                    <action selector="skipButtonPressed:" destination="Vdw-Cg-ESA" eventType="touchUpInside" id="VTX-NJ-VSC"/>
                                     <segue destination="KsC-35-ozE" kind="presentation" modalPresentationStyle="fullScreen" id="b21-wc-0ol"/>
                                 </connections>
                             </button>
@@ -295,7 +294,7 @@
                                                         </constraints>
                                                         <state key="normal" title="Button" image="lock"/>
                                                         <connections>
-                                                            <action selector="showRepeatPasswordPressed:" destination="oEh-LX-NYl" eventType="touchUpInside" id="0Ci-fR-sQV"/>
+                                                            <action selector="showPasswordPressed:" destination="oEh-LX-NYl" eventType="touchUpInside" id="554-AK-lOJ"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -394,15 +393,15 @@
                     <connections>
                         <outlet property="emailErrorMessage" destination="Z9y-JG-OA4" id="LRv-yi-zgF"/>
                         <outlet property="emailField" destination="UOl-3c-aRN" id="nKQ-va-S5v"/>
-                        <outlet property="emailLabel" destination="14S-up-YTX" id="Qf0-n4-jWw"/>
                         <outlet property="loginErrorMessage" destination="K3a-sV-5as" id="UbJ-vk-2ZX"/>
-                        <outlet property="mainStackView" destination="kxc-QS-Hbb" id="t99-kV-Jdv"/>
                         <outlet property="passwordErrorMessage" destination="3WA-ne-EpD" id="xIJ-lA-4vY"/>
                         <outlet property="passwordField" destination="Bx1-ZE-19N" id="LIb-0Q-4Fn"/>
                         <outlet property="profileImage" destination="dlt-3p-vnP" id="EVw-e3-7oj"/>
                         <outlet property="repeatPasswordField" destination="A3d-EQ-zIT" id="ZZ2-Hv-Kzd"/>
                         <outlet property="repeatPasswordMessage" destination="zGf-7s-m7o" id="emM-md-Kth"/>
                         <outlet property="scrollView" destination="19O-tx-84K" id="xLF-PK-oSg"/>
+                        <outlet property="showPasswordButton" destination="b8d-FX-FR3" id="42X-td-8dI"/>
+                        <outlet property="showRepeatPasswordButton" destination="wPM-2a-Zi0" id="unr-aS-fPz"/>
                         <outlet property="usernameField" destination="Wsf-Cu-kUz" id="UvQ-30-gRQ"/>
                     </connections>
                 </viewController>
@@ -414,7 +413,7 @@
         <!--Profile-->
         <scene sceneID="oKS-Ed-KTu">
             <objects>
-                <viewController storyboardIdentifier="profileScreen" id="KsC-35-ozE" customClass="SignUpViewController" customModule="CookingApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpVC" id="KsC-35-ozE" customClass="SignUpViewController" customModule="CookingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vBL-95-SKz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -477,7 +476,6 @@
                                                             <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="termsOfUsePressed:" destination="KsC-35-ozE" eventType="touchUpInside" id="juH-Ug-GVE"/>
                                                             <segue destination="fUX-ka-oPT" kind="presentation" modalPresentationStyle="fullScreen" id="Tmp-k0-mK8"/>
                                                         </connections>
                                                     </button>
@@ -556,13 +554,6 @@
                     <navigationItem key="navigationItem" id="OrR-C8-nBi"/>
                     <connections>
                         <outlet property="checkbox" destination="xrg-xc-EcE" id="q4Q-NY-nfW"/>
-                        <outlet property="emailSignIn" destination="YGa-Tt-Yh1" id="4K3-Kw-sXF"/>
-                        <outlet property="googleSignInButton" destination="1Gg-jX-piq" id="7Cl-uv-Dmc"/>
-                        <outlet property="loginButton" destination="kSe-xq-UAA" id="Owe-zL-D9p"/>
-                        <outlet property="profileMainLabel" destination="M6I-YJ-IIk" id="Tbz-gO-aEg"/>
-                        <outlet property="signInButton" destination="YGa-Tt-Yh1" id="9rl-fT-Hh5"/>
-                        <outlet property="stackView" destination="tv6-Qp-l2X" id="SeN-jc-9rn"/>
-                        <outlet property="termsOfUseLabel" destination="vTA-f7-XsY" id="aFf-xN-JCy"/>
                         <segue destination="9Bf-bW-vIQ" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="SaK-fM-q19"/>
                     </connections>
                 </viewController>
@@ -960,7 +951,7 @@
                                 <rect key="frame" x="0.0" y="122" width="414" height="691"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HpV-5A-lPI">
-                                        <rect key="frame" x="20" y="40" width="372.5" height="534.5"/>
+                                        <rect key="frame" x="20" y="40" width="372.5" height="584.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload a photo for your dish" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGv-sX-lye">
                                                 <rect key="frame" x="0.0" y="0.0" width="259.5" height="22.5"/>
@@ -968,36 +959,32 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLV-Nl-MGb">
-                                                <rect key="frame" x="0.0" y="42.5" width="100" height="100"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addImage" translatesAutoresizingMaskIntoConstraints="NO" id="Md9-1L-aKi">
+                                                <rect key="frame" x="0.0" y="42.5" width="150" height="150"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="pvX-7H-Atq"/>
-                                                    <constraint firstAttribute="width" constant="100" id="zkK-dr-Rpp"/>
+                                                    <constraint firstAttribute="width" constant="150" id="pQM-7r-J1L"/>
+                                                    <constraint firstAttribute="height" constant="150" id="zkY-QN-UVh"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="addImage"/>
-                                                <connections>
-                                                    <action selector="addPhotoPressed:" destination="Zay-Fs-c3y" eventType="touchUpInside" id="Rd0-7W-2Vs"/>
-                                                </connections>
-                                            </button>
+                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name your recipe" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1L-Sh-x7P">
-                                                <rect key="frame" x="0.0" y="162.5" width="159.5" height="22.5"/>
+                                                <rect key="frame" x="0.0" y="212.5" width="159.5" height="22.5"/>
                                                 <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jy1-go-0Lz">
-                                                <rect key="frame" x="0.0" y="205" width="372.5" height="34"/>
+                                                <rect key="frame" x="0.0" y="255" width="372.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7f-9z-hXj">
-                                                <rect key="frame" x="0.0" y="259" width="167.5" height="22.5"/>
+                                                <rect key="frame" x="0.0" y="309" width="167.5" height="22.5"/>
                                                 <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Write your recipe description here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eBC-O6-cdm">
-                                                <rect key="frame" x="0.0" y="301.5" width="372.5" height="128"/>
+                                                <rect key="frame" x="0.0" y="351.5" width="372.5" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="LFh-uS-m6f"/>
@@ -1007,15 +994,15 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gt-g7-m6M">
-                                                <rect key="frame" x="0.0" y="449.5" width="372.5" height="35"/>
+                                                <rect key="frame" x="0.0" y="499.5" width="372.5" height="35"/>
                                                 <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="20"/>
-                                                <state key="normal" title="Save"/>
+                                                <state key="normal" title="Create"/>
                                                 <connections>
                                                     <action selector="saveButtonPressed:" destination="Zay-Fs-c3y" eventType="touchUpInside" id="rbS-S4-xJA"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nET-c7-iRZ">
-                                                <rect key="frame" x="0.0" y="504.5" width="372.5" height="30"/>
+                                                <rect key="frame" x="0.0" y="554.5" width="372.5" height="30"/>
                                                 <state key="normal" title="Get"/>
                                                 <connections>
                                                     <action selector="getPressed:" destination="Zay-Fs-c3y" eventType="touchUpInside" id="Lee-he-xhs"/>
@@ -1024,15 +1011,15 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="1gt-g7-m6M" firstAttribute="leading" secondItem="HpV-5A-lPI" secondAttribute="leading" id="0bB-Es-QfM"/>
+                                            <constraint firstItem="Md9-1L-aKi" firstAttribute="top" secondItem="jGv-sX-lye" secondAttribute="bottom" constant="20" id="6GE-FU-29q"/>
                                             <constraint firstAttribute="trailing" secondItem="1gt-g7-m6M" secondAttribute="trailing" id="ALW-1T-6LR"/>
                                             <constraint firstItem="Jy1-go-0Lz" firstAttribute="leading" secondItem="HpV-5A-lPI" secondAttribute="leading" id="AgK-2H-uaG"/>
                                             <constraint firstItem="eBC-O6-cdm" firstAttribute="leading" secondItem="HpV-5A-lPI" secondAttribute="leading" id="B10-J3-5tl"/>
                                             <constraint firstAttribute="trailing" secondItem="eBC-O6-cdm" secondAttribute="trailing" id="BVm-a3-xMi"/>
-                                            <constraint firstItem="aLV-Nl-MGb" firstAttribute="top" secondItem="jGv-sX-lye" secondAttribute="bottom" constant="20" id="BlU-Oz-eVu"/>
                                             <constraint firstItem="G7f-9z-hXj" firstAttribute="top" secondItem="Jy1-go-0Lz" secondAttribute="bottom" constant="20" id="Cdo-3v-dxG"/>
-                                            <constraint firstItem="q1L-Sh-x7P" firstAttribute="top" secondItem="aLV-Nl-MGb" secondAttribute="bottom" constant="20" id="E75-kG-bUd"/>
                                             <constraint firstAttribute="trailing" secondItem="Jy1-go-0Lz" secondAttribute="trailing" id="NRy-1Y-yzd"/>
                                             <constraint firstItem="Jy1-go-0Lz" firstAttribute="top" secondItem="q1L-Sh-x7P" secondAttribute="bottom" constant="20.000000000000011" id="OeF-Rd-gdj"/>
+                                            <constraint firstItem="q1L-Sh-x7P" firstAttribute="top" secondItem="Md9-1L-aKi" secondAttribute="bottom" constant="20" id="dn7-au-BVx"/>
                                             <constraint firstItem="1gt-g7-m6M" firstAttribute="top" secondItem="eBC-O6-cdm" secondAttribute="bottom" constant="20" id="feL-Oe-0jk"/>
                                             <constraint firstItem="eBC-O6-cdm" firstAttribute="top" secondItem="G7f-9z-hXj" secondAttribute="bottom" constant="20" id="hTK-6x-jgq"/>
                                             <constraint firstItem="nET-c7-iRZ" firstAttribute="centerX" secondItem="HpV-5A-lPI" secondAttribute="centerX" id="l3E-Yh-MxX"/>
@@ -1064,7 +1051,7 @@
                     <navigationItem key="navigationItem" title="Create" prompt=" " id="kkC-g9-31T"/>
                     <connections>
                         <outlet property="recipeDescription" destination="eBC-O6-cdm" id="Bms-mI-oa3"/>
-                        <outlet property="recipeImage" destination="aLV-Nl-MGb" id="bXr-95-BzA"/>
+                        <outlet property="recipeImageView" destination="Md9-1L-aKi" id="gK0-tG-bKK"/>
                         <outlet property="recipeNameField" destination="Jy1-go-0Lz" id="Q63-fm-Xqz"/>
                         <outlet property="scrollView" destination="VSn-Ef-Iuw" id="uEu-Mm-dm2"/>
                     </connections>

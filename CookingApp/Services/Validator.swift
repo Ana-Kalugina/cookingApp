@@ -7,11 +7,11 @@
 
 import Foundation
 import UIKit
-
+//swiftlint:disable line_length
 class Validator {
 
     func validate(userName: String, userPassword: String, email: String, repeatPassword: String) -> Bool {
-        if userName.isEmpty || userPassword.count < 6 || email.isEmpty || repeatPassword.count < 6{
+        if userName.isEmpty || userPassword.count < 6 || email.isEmpty || repeatPassword.count < 6 {
             return false
         } else {
             for item in userName.enumerated() {
@@ -20,7 +20,7 @@ class Validator {
                 } else if item.element.isNumber {
                     return true
                 } else {
-                   return false
+                    return false
                 }
             }
             let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -32,31 +32,36 @@ class Validator {
         return true
     }
 
-
+    func recipeValidate(recipeName: String, recipeDescription: String, recipePhoto: UIImageView) -> Bool {
+        if recipeName.isEmpty || recipeDescription.isEmpty || recipePhoto.image == UIImage(named: "addImage") {
+            return false
+        }
+        return true
+    }
 
     func loginTextCheck(loginText: String, loginErrorMessage: String?) -> String {
-           guard var usernameError = loginErrorMessage else {fatalError()}
-              if loginText.isEmpty {
-               usernameError = "The login field can't be empty"
-              } else {
-                  for item in loginText.enumerated() {
-                      if !(item.element.isLetter || item.element.isNumber) {
-                          usernameError = "You can use only numbers and letters"
-                      } else {
-                          usernameError = " "
-                      }
-                  }
-              }
-           return usernameError
-          }
+        guard var usernameError = loginErrorMessage else {fatalError()}
+        if loginText.isEmpty {
+            usernameError = "The login field can't be empty"
+        } else {
+            for item in loginText.enumerated() {
+                if !(item.element.isLetter || item.element.isNumber) {
+                    usernameError = "You can use only numbers and letters"
+                } else {
+                    usernameError = " "
+                }
+            }
+        }
+        return usernameError
+    }
 
-       func passwordTextCheck(passwordText: String, passwordErrorMessage: String?) -> String {
-           guard var passwordErrorText = passwordErrorMessage
-               else { fatalError()}
-              if passwordText.count < 6 {
-               passwordErrorText = "Your password can't consist of less then 6 elements"
-              } else {
-                passwordErrorText = " "
+    func passwordTextCheck(passwordText: String, passwordErrorMessage: String?) -> String {
+        guard var passwordErrorText = passwordErrorMessage
+            else { fatalError()}
+        if passwordText.count < 6 {
+            passwordErrorText = "Your password can't consist of less then 6 elements"
+        } else {
+            passwordErrorText = " "
         }
         return passwordErrorText
     }
@@ -66,7 +71,7 @@ class Validator {
         if passwordText != repeatPassword {
             passwordErrorText = "You entered wrong password"
         } else {
-                passwordErrorText = " "
+            passwordErrorText = " "
         }
         return passwordErrorText
     }

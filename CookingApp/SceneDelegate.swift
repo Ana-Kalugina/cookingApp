@@ -13,20 +13,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
         if let signed = UserDefaults.standard.object(forKey: "signed") as? Bool {
-                   if signed == true {
-                       let windowScene = UIWindowScene(session: session, connectionOptions: connectionOptions)
-                       self.window = UIWindow(windowScene: windowScene)
-                       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                       guard let rootVC = storyboard.instantiateViewController(identifier: "TabBarController") as? UITabBarController else {
-                           print("Controller not found")
-                           return
-                       }
-                       self.window?.rootViewController = rootVC
-                       self.window?.makeKeyAndVisible()
-                   }
-               }
+            if signed == true {
+                self.window = UIWindow(windowScene: windowScene)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                guard let rootVC = storyboard.instantiateViewController(identifier: "TabBarController") as? UITabBarController else {
+                    print("Controller not found")
+                    return
+                }
+                self.window?.rootViewController = rootVC
+                self.window?.makeKeyAndVisible()
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04150B34247CBF500028BBBD /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04150B33247CBF500028BBBD /* AuthService.swift */; };
+		0476398D247CA16400E1ADEC /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0476398C247CA16400E1ADEC /* TextFieldDelegate.swift */; };
 		04FC09BB247B00F6003359D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC09BA247B00F6003359D2 /* AppDelegate.swift */; };
 		04FC09BD247B00F6003359D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC09BC247B00F6003359D2 /* SceneDelegate.swift */; };
 		04FC09C2247B00F6003359D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FC09C0247B00F6003359D2 /* Main.storyboard */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04150B33247CBF500028BBBD /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		0476398C247CA16400E1ADEC /* TextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 		04FC09B7247B00F6003359D2 /* CookingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04FC09BA247B00F6003359D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04FC09BC247B00F6003359D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 			children = (
 				04FC09DB247B0A67003359D2 /* Validator.swift */,
 				04FC09DD247B0A75003359D2 /* ProfileManager.swift */,
+				0476398C247CA16400E1ADEC /* TextFieldDelegate.swift */,
+				04150B33247CBF500028BBBD /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -351,6 +357,7 @@
 				04FC09F3247B245E003359D2 /* ImagePicker.swift in Sources */,
 				04FC09F1247B2404003359D2 /* CreateRecipeScreenViewController.swift in Sources */,
 				04FC09EC247B2226003359D2 /* RecipesFeedCollectionViewCell.swift in Sources */,
+				0476398D247CA16400E1ADEC /* TextFieldDelegate.swift in Sources */,
 				04FC09E2247B0C30003359D2 /* SignUpViewController.swift in Sources */,
 				04FC09BD247B00F6003359D2 /* SceneDelegate.swift in Sources */,
 				04FC09E8247B14B7003359D2 /* TermsOfUseViewController.swift in Sources */,
@@ -358,6 +365,7 @@
 				04FC09EF247B224F003359D2 /* RecipesFeedViewController.swift in Sources */,
 				04FC09D1247B016A003359D2 /* Slide.swift in Sources */,
 				04FC09F6247B24C9003359D2 /* ProfileViewController.swift in Sources */,
+				04150B34247CBF500028BBBD /* AuthService.swift in Sources */,
 				04FC09DC247B0A67003359D2 /* Validator.swift in Sources */,
 				04FC09D5247B0513003359D2 /* RegistrationViewController.swift in Sources */,
 			);

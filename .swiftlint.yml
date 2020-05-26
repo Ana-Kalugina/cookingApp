@@ -5,4 +5,5 @@ disabled_rules:
 - trailing_whitespace
 - vertical_whitespace
 - trailing_newline
+- line_length
 

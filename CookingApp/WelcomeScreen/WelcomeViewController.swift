@@ -66,18 +66,13 @@ class WelcomeViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-             let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
-             pageControl.currentPage = Int(pageIndex)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
+        pageControl.currentPage = Int(pageIndex)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         setupSlideScrollView(slides: slides)
-    }
-
-
-    @IBAction func skipButtonPressed(_ sender: Any) {
-     //   performSegue(withIdentifier: skipSegueID, sender: nil)
     }
 
 }

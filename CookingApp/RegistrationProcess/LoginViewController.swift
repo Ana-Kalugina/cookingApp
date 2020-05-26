@@ -7,16 +7,17 @@
 
 import UIKit
 import Firebase
-
-class LoginViewController: UIViewController, UITextFieldDelegate {
+import JGProgressHUD
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var emailErrorMessage: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordErrorMessage: UILabel!
-    var activeField: UITextField?
     @IBOutlet weak var scrollView: UIScrollView!
+    var activeField: UITextField?
     let database = Firestore.firestore()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         emailErrorMessage.isHidden = true
@@ -35,6 +36,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func loginButtonPressed(_ sender: Any) {
+        view.endEditing(true)
+        let progressHud = JGProgressHUD(style: .dark)
+        progressHud.textLabel.text = "Loading"
+        progressHud.show(in: self.view)
+        progressHud.dismiss(afterDelay: 2.0)
         logInUser()
     }
 
@@ -56,25 +62,34 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         guard let passwordText = passwordTextField.text else {return}
         Auth.auth().signIn(withEmail: emailText, password: passwordText) { (authResult, error) in
             if error == nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
                 profileManager.signed(value: true)
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let tabbar = (storyboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController) {
-                    tabbar.modalPresentationStyle = .fullScreen
-                    self.present(tabbar, animated: true, completion: nil)
-                }
+                self.presentTabBar()
             } else if error?._code == AuthErrorCode.wrongPassword.rawValue {
-                let alert = UIAlertController(title: "Wrong password", message: "Please try again", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true)
+                self.createAlert(title: "Wrong password", message: "Please try again", preferredStyle: .alert, alertActionTitle: "Ok")
             } else if error?._code == AuthErrorCode.userNotFound.rawValue {
-                let alert = UIAlertController(title: "Error", message: "User not found", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true)
+                self.createAlert(title: "Error", message: "User not found", preferredStyle: .alert, alertActionTitle: "Ok")
             }
         }
     }
 
+    func presentTabBar() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let tabbar = (storyboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController) {
+            tabbar.modalPresentationStyle = .fullScreen
+            self.present(tabbar, animated: true, completion: nil)
+        }
+    }
+
+    func createAlert(title: String, message: String, preferredStyle: UIAlertController.Style, alertActionTitle: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        alert.addAction(UIAlertAction(title: alertActionTitle, style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+
+}
+
+extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
@@ -108,6 +123,4 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeField = nil
     }
-
-
 }

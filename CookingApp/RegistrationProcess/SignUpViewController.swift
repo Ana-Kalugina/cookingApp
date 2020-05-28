@@ -11,9 +11,6 @@ import GoogleSignIn
 //swiftlint:disable line_length
 class SignUpViewController: UIViewController, GIDSignInDelegate {
 
-    @IBOutlet weak var checkbox: UIButton!
-    var checkBoxState = "unchecked"
-    var termsOfUseAreAccepted = false
     var profileManager = ProfileManager.shared
 
     override func viewDidLoad() {
@@ -41,44 +38,12 @@ class SignUpViewController: UIViewController, GIDSignInDelegate {
         }
     }
 
-    @IBAction func emailSignInPressed(_ sender: Any) {
-        if termsOfUseAreAccepted == false {
-            createAlert(title: "Terms of Use", message: "You have to read and accept terms of use before continuing!", preferredStyle: .alert, alertActionTitle: "Ok")
-        }
-    }
-
     @IBAction func logInButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "loginSegue", sender: nil)
     }
 
-    @IBAction func profileUnwindSegueFromTermsOfUse(segue: UIStoryboardSegue) {
-        termsOfUseAreAccepted = true
-        checkbox.setBackgroundImage(UIImage(named: "checkboxChecked"), for: .normal)
-        checkBoxState = "checked"
-    }
-    
-    @IBAction func profileUnwindSegueFromSignUp(segue: UIStoryboardSegue) {
-
-    }
-
-    @IBAction func profileUnwindSegueFromLogIn(segue: UIStoryboardSegue) {
-
-    }
-
-    @IBAction func logOutUnwindSegue(segue: UIStoryboardSegue) {
-
-    }
-
-    @IBAction func ckeckboxChecked(_ sender: Any) {
-        if checkBoxState == "unchecked" {
-            checkBoxState = "checked"
-            checkbox.setBackgroundImage(UIImage(named: "checkboxChecked"), for: .normal)
-            termsOfUseAreAccepted = true
-        } else if checkBoxState == "checked" {
-            checkBoxState = "unchecked"
-            checkbox.setBackgroundImage(UIImage(named: "checkboxUnchecked"), for: .normal)
-            termsOfUseAreAccepted = false
-        }
+    @IBAction func signUpUnwind(segue: UIStoryboardSegue) {
+        
     }
 
     func presentTabBar() {
@@ -87,12 +52,6 @@ class SignUpViewController: UIViewController, GIDSignInDelegate {
             tabbar.modalPresentationStyle = .fullScreen
             self.present(tabbar, animated: true, completion: nil)
         }
-    }
-
-    func createAlert(title: String, message: String, preferredStyle: UIAlertController.Style, alertActionTitle: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-        alert.addAction(UIAlertAction(title: alertActionTitle, style: .default, handler: nil))
-        self.present(alert, animated: true)
     }
 }
 

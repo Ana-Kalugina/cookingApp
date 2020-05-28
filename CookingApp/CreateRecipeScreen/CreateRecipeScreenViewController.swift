@@ -9,10 +9,9 @@ import UIKit
 import Firebase
 import JGProgressHUD
 //swiftlint:disable all
-class CreateRecipeScreenViewController: UIViewController,UITextFieldDelegate, UITextViewDelegate {
+class CreateRecipeScreenViewController: UIViewController {
 
-    //@IBOutlet weak var recipeImage: UIButton!
-   // var imagePicker: ImagePicker?
+    var imagePicker: ImagePicker?
     var activeField: UITextField?
     var activeView: UITextView?
     @IBOutlet weak var scrollView: UIScrollView!
@@ -20,11 +19,12 @@ class CreateRecipeScreenViewController: UIViewController,UITextFieldDelegate, UI
     var database = Firestore.firestore()
     @IBOutlet weak var recipeDescription: UITextView!
     @IBOutlet weak var recipeImageView: UIImageView!
-    var selectedImage: UIImage?
+    @IBOutlet weak var removeBtn: UIBarButtonItem!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       // self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         navigationItem.prompt = " "
         recipeNameField.delegate = self
         recipeDescription.delegate = self
@@ -35,17 +35,82 @@ class CreateRecipeScreenViewController: UIViewController,UITextFieldDelegate, UI
         recipeImageView.isUserInteractionEnabled  = true
         recipeImageView.addGestureRecognizer(tapGesture)
         recipeImageView.image = UIImage(named: "addImage")
+        recipeDescription.translatesAutoresizingMaskIntoConstraints = false
+        recipeDescription.sizeToFit()
     }
 
     @objc func changeRecipeImage() {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        present(pickerController, animated: true, completion: nil)
+        self.imagePicker!.present(from: self.view!)
     }
 
-//    @IBAction func addPhotoPressed(_ sender: Any) {
-//        self.imagePicker!.present(from: sender as! UIView)
-//    }
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        let isValid = Validator().recipeValidate(recipeName: recipeNameField.text ?? "", recipeDescription: recipeDescription.text ?? "", recipePhoto: recipeImageView)
+        if isValid {
+            presentProgressHud()
+            addRecipeToStorage()
+        }
+        else {
+            createAlert(title: "Error", message: "Please do not leave fields blank ", preferredStyle: .alert, alertActionTitle: "Ok")
+        }
+    }
+
+    @IBAction func removeButtonPressed(_ sender: Any) {
+        clean()
+    }
+
+    func addRecipeToStorage() {
+        guard let profileImg = self.recipeImageView.image,
+            let imageData = profileImg.jpegData(compressionQuality: 1.0) else {
+                return
+        }
+        let recipePhotoID = UUID().uuidString
+        let storageReference = Storage.storage().reference(forURL: "gs://cookingapp-ana23.appspot.com").child("recipeImage").child(recipePhotoID)
+        storageReference.putData(imageData, metadata: nil) { (metaData, error) in
+            if error != nil {
+                return
+            }
+            storageReference.downloadURL { (url, error) in
+                if error != nil {
+                    return
+                }
+                guard let recipeUrl = url?.absoluteString else {return}
+                guard let recipeName = self.recipeNameField.text else {return}
+                guard let recipeDescription = self.recipeDescription.text else {return}
+                
+                Database.sendDataToDatabase(uid:recipePhotoID, photoUrl: recipeUrl, recipeName: recipeName, recipeDescription: recipeDescription)
+                self.clean()
+                self.tabBarController?.selectedIndex = 0
+            }
+        }
+        
+    }
+    func clean() {
+        self.recipeImageView.image = #imageLiteral(resourceName: "addImage")
+        self.recipeNameField.text = ""
+        self.recipeDescription.text = ""
+    }
+
+    func presentProgressHud() {
+        let progressHud = JGProgressHUD(style: .dark)
+        progressHud.textLabel.text = "Loading"
+        progressHud.show(in: self.view)
+        progressHud.dismiss(afterDelay: 2.0)
+    }
+
+    func createAlert(title: String, message: String, preferredStyle: UIAlertController.Style, alertActionTitle: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        alert.addAction(UIAlertAction(title: alertActionTitle, style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+}
+
+extension CreateRecipeScreenViewController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        self.recipeImageView.image = image ?? UIImage(named: "addImage")
+    }
+}
+
+extension CreateRecipeScreenViewController: UITextFieldDelegate, UITextViewDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -63,10 +128,8 @@ class CreateRecipeScreenViewController: UIViewController,UITextFieldDelegate, UI
         let info: NSDictionary = notification.userInfo! as NSDictionary
         guard let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size else {return}
         let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
-
         self.scrollView.contentInset = contentInsets
         self.scrollView.scrollIndicatorInsets = contentInsets
-
         var viewFrame: CGRect = self.view.frame
         viewFrame.size.height -= keyboardSize.height
         if !viewFrame.contains(activeField.frame.origin) {
@@ -75,7 +138,6 @@ class CreateRecipeScreenViewController: UIViewController,UITextFieldDelegate, UI
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
         activeField = textField
     }
 
@@ -83,118 +145,4 @@ class CreateRecipeScreenViewController: UIViewController,UITextFieldDelegate, UI
         activeField = nil
     }
 
-
-   
-
-
-    @IBAction func saveButtonPressed(_ sender: Any) {
-        let isValid = Validator().recipeValidate(recipeName: recipeNameField.text ?? "", recipeDescription: recipeDescription.text ?? "", recipePhoto: recipeImageView)
-        if isValid {
-             add()
-        }
-        else {
-            createAlert(title: "Error", message: "Please do not leave fields blank ", preferredStyle: .alert, alertActionTitle: "Ok")
-        }
-    }
-
-    func add() {
-        guard let profileImg = self.selectedImage,
-            let imageData = profileImg.jpegData(compressionQuality: 1.0) else {
-                return
-        }
-        guard let currentUser = Auth.auth().currentUser?.uid else {return}
-        let storageReference = Storage.storage().reference(forURL: "gs://cookingapp-ana23.appspot.com").child("recipes").child(currentUser)
-        storageReference.putData(imageData, metadata: nil) { (metaData, error) in
-            if error != nil {
-                return
-            }
-            storageReference.downloadURL { (url, error) in
-                if error != nil {
-                    return
-                }
-                guard let recipeUrl = url?.absoluteString else {return}
-                guard let recipeName = self.recipeNameField.text else {return}
-                guard let recipeDescription = self.recipeDescription.text else {return}
-                self.sendDataToDatabase(uid:currentUser, photoUrl: recipeUrl, recipeName: recipeName, recipeDescription: recipeDescription )
-            }
-        }
-        
-    }
-
-    func sendDataToDatabase(uid: String, photoUrl: String, recipeName: String, recipeDescription: String) {
-        let reference = self.database.collection("users").document("\(uid)")
-        reference.collection("recipes").document().setData(["recipePhotoUrl": photoUrl, "recipeName": recipeName, "recipeDescription": recipeDescription])
-        self.recipeImageView.image = #imageLiteral(resourceName: "addImage")
-        self.recipeNameField.text = ""
-        self.recipeDescription.text = ""
-        self.tabBarController?.selectedIndex = 0
-        }
-
-
-
-
-
-    // func add() {
-    //        guard let recipeImage = recipeImage.imageView?.image,
-    //            let recipeImageData = recipeImage.jpegData(compressionQuality: 1.0) else {
-    //                return
-    //        }
-    //        let recipeImageName = UUID().uuidString
-    //
-    //        let recipes = ["recipeName": recipeNameField.text, "recipeDescription": recipeDescription.text, "recipeImage": recipeImageName] as [String : Any]
-    //        guard let curentUser = Auth.auth().currentUser?.uid else {return}
-    //        let reference = database.collection("users").document("\(curentUser)").collection("recipes")
-    //        //var reference = database.document("users/\(curentUser)").collection("recipes")
-    //        reference.addDocument(data: recipes)
-    //
-    //    }
-
-    func getCollection() {
-        guard let curentUser = Auth.auth().currentUser?.uid else {return}
-        //        database.collection("users").document("\(curentUser)").collection("recipes").getDocuments()
-        database.collection("users").document("\(curentUser)").collection("recipes").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                print(querySnapshot?.count)
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                }
-            }
-        }
-    }
-    @IBAction func getPressed(_ sender: Any) {
-        getCollection()
-    }
-
-    func createAlert(title: String, message: String, preferredStyle: UIAlertController.Style, alertActionTitle: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-        alert.addAction(UIAlertAction(title: alertActionTitle, style: .default, handler: nil))
-        self.present(alert, animated: true)
-    }
-
-
 }
-
-
-
-//extension CreateRecipeScreenViewController: ImagePickerDelegate {
-//
-//    func didSelect(image: UIImage?) {
-//        //self.recipeImage.imageView?.image = image
-//      //  self.recipeImage.setImage(image, for: .normal)
-//    }
-//
-//}
-
-extension CreateRecipeScreenViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let image = info[.originalImage] as? UIImage {
-            selectedImage = image
-            recipeImageView.image = image
-        }
-        dismiss(animated: true, completion: nil)
-    }
-}
-
-

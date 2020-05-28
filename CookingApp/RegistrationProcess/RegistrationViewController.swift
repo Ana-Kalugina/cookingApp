@@ -22,10 +22,9 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var showPasswordButton: UIButton!
     @IBOutlet weak var showRepeatPasswordButton: UIButton!
-    var textFieldManager = TextFieldManager.shared
     var selectedImage: UIImage?
-    var database = Firestore.firestore()
     var activeField: UITextField?
+    var imagePicker: ImagePicker?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,21 +32,19 @@ class RegistrationViewController: UIViewController {
         passwordField.delegate = self
         emailField.delegate = self
         repeatPasswordField.delegate = self
-
         loginErrorMessage.isHidden = true
         emailErrorMessage.isHidden = true
         passwordErrorMessage.isHidden = true
         repeatPasswordMessage.isHidden = true
         registerForKeyboardNotifications()
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.changeProfileImage))
         profileImage.isUserInteractionEnabled  = true
         profileImage.addGestureRecognizer(tapGesture)
     }
 
     @objc func changeProfileImage(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        present(pickerController, animated: true, completion: nil)
+        self.imagePicker!.present(from: self.view!)
     }
 
     @IBAction func showPasswordPressed(_ sender: UIButton) {
@@ -70,10 +67,7 @@ class RegistrationViewController: UIViewController {
         view.endEditing(true)
         let isValid = Validator().validate(userName: usernameField.text ?? "", userPassword: passwordField.text ?? "", email: emailField.text ?? "", repeatPassword: repeatPasswordField.text ?? "")
         if isValid {
-            let progressHud = JGProgressHUD(style: .dark)
-            progressHud.textLabel.text = "Loading"
-            progressHud.show(in: self.view)
-            progressHud.dismiss(afterDelay: 2.0)
+            presentProgressHud()
             createUser()
         } else {
             validateFields()
@@ -116,12 +110,14 @@ class RegistrationViewController: UIViewController {
         repeatPasswordMessage.text = validator.repeatPasswordCheck(passwordText: passwordField.text ?? "", repeatPassword: repeatPasswordField.text ?? "", repeatPasswordErrorMessage: repeatPasswordMessage.text ?? "")
     }
 
-    ///User Creation
+   ///User Creation
+
     func createUser() {
         let profileManager = ProfileManager.shared
         guard let loginText = usernameField.text else {fatalError()}
         guard let passwordText = passwordField.text else {fatalError()}
         guard let emailText = emailField.text else {fatalError()}
+        
         Auth.auth().createUser(withEmail: emailText, password: passwordText) { (authResult, error) in
             if error == nil {
                 AuthService.signUp(email: emailText, password: passwordText) {
@@ -129,7 +125,7 @@ class RegistrationViewController: UIViewController {
                 profileManager.signed(value: true)
                 guard let currentUser = Auth.auth().currentUser?.uid else {return}
                 let storageReference = Storage.storage().reference(forURL: "gs://cookingapp-ana23.appspot.com").child("profileImage").child(currentUser)
-                guard let profileImg = self.selectedImage,
+                guard let profileImg = self.profileImage.image ?? UIImage(named: "user"),
                     let imageData = profileImg.jpegData(compressionQuality: 1.0) else {
                         return
                 }
@@ -142,10 +138,9 @@ class RegistrationViewController: UIViewController {
                             return
                         }
                         guard let profileImageUrl = url?.absoluteString else {return}
-                        self.pushUserInformationToDatabase(username: loginText, email: emailText, profileUrl: profileImageUrl, uid: currentUser)
+                        Database.pushUserInformationToDatabase(username: loginText, email: emailText, profileUrl: profileImageUrl, uid: currentUser)
                     }
                 }
-                //reference.collection("recipes").document("newRec").setData(["name": "pizza", "des": "do smth"])
                 self.presentTabBar()
             } else if error?._code == AuthErrorCode.emailAlreadyInUse.rawValue {
                 print(error?.localizedDescription as Any)
@@ -154,15 +149,17 @@ class RegistrationViewController: UIViewController {
         }
     }
 
-    func pushUserInformationToDatabase(username: String, email: String, profileUrl: String, uid: String) {
-        let reference = self.database.collection("users").document("\(uid)")
-        reference.setData(["username": username, "userID": uid, "email": email, "profileImageUrl": profileUrl])
-    }
-
     func createAlert(title: String, message: String, preferredStyle: UIAlertController.Style, alertActionTitle: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         alert.addAction(UIAlertAction(title: alertActionTitle, style: .default, handler: nil))
         self.present(alert, animated: true)
+    }
+
+    func presentProgressHud() {
+        let progressHud = JGProgressHUD(style: .dark)
+        progressHud.textLabel.text = "Loading"
+        progressHud.show(in: self.view)
+        progressHud.dismiss(afterDelay: 2.0)
     }
 
     func presentTabBar() {
@@ -174,13 +171,9 @@ class RegistrationViewController: UIViewController {
     }
 }
 
-extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let image = info[.originalImage] as? UIImage {
-            selectedImage = image
-            profileImage.image = image
-        }
-        dismiss(animated: true, completion: nil)
+extension RegistrationViewController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        self.profileImage.image = image ?? UIImage(named: "addImage")
     }
 }
 

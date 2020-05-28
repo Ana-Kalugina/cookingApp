@@ -13,4 +13,5 @@ target 'CookingApp' do
 	pod 'GoogleSignIn'
 	pod 'Firebase/Storage'
 	pod 'JGProgressHUD'
+	pod 'Kingfisher'
 end

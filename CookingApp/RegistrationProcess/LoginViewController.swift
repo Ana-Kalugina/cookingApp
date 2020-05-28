@@ -37,10 +37,7 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginButtonPressed(_ sender: Any) {
         view.endEditing(true)
-        let progressHud = JGProgressHUD(style: .dark)
-        progressHud.textLabel.text = "Loading"
-        progressHud.show(in: self.view)
-        progressHud.dismiss(afterDelay: 2.0)
+        presentProgressHud()
         logInUser()
     }
 
@@ -71,6 +68,13 @@ class LoginViewController: UIViewController {
                 self.createAlert(title: "Error", message: "User not found", preferredStyle: .alert, alertActionTitle: "Ok")
             }
         }
+    }
+
+    func presentProgressHud() {
+        let progressHud = JGProgressHUD(style: .dark)
+        progressHud.textLabel.text = "Loading"
+        progressHud.show(in: self.view)
+        progressHud.dismiss(afterDelay: 2.0)
     }
 
     func presentTabBar() {

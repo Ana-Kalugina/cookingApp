@@ -11,5 +11,6 @@ class RecipesFeedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var userPhoto: UIImageView!
     @IBOutlet weak var recipePhoto: UIImageView!
     @IBOutlet weak var recipeName: UILabel!
-
+    @IBOutlet weak var userName: UILabel!
+    
 }

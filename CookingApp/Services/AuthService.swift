@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 
 class AuthService {
-
+    
     static func signUp(email: String, password: String, completion: @escaping () -> Void) {
         
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in

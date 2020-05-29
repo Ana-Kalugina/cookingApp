@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class Database {
-
+    
     enum DataBaseKeys {
         case username
         case profileImageUrl
@@ -19,19 +19,20 @@ class Database {
         case recipeName
         case recipeDescription
         case recipePhotoUrl
+        case recipeCategory
     }
-
+    
     static var database = Firestore.firestore()
     static var currentUID = Auth.auth().currentUser?.uid
-
+    
     static func pushUserInformationToDatabase(username: String, email: String, profileUrl: String, uid: String) {
         getUserReference().setData(["username": username, "userID": uid, "email": email, "profileImageUrl": profileUrl])
     }
-
-    static func sendDataToDatabase(uid: String, photoUrl: String, recipeName: String, recipeDescription: String) {
-        recipesReference.document().setData(["recipePhotoUrl": photoUrl, "recipeName": recipeName, "recipeDescription": recipeDescription])
+    
+    static func sendDataToDatabase(uid: String, photoUrl: String, recipeName: String, recipeDescription: String, recipeCategory: String) {
+        recipesReference.document().setData(["recipePhotoUrl": photoUrl, "recipeName": recipeName, "recipeDescription": recipeDescription, "recipeCategory": recipeCategory])
     }
-
+    
     static func getData() {
         Database.database.collection("users").getDocuments { (querySnapshot, error) in
             if let error = error {
@@ -39,7 +40,7 @@ class Database {
             } else {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
-
+                    
                 }
             }
         }
@@ -51,5 +52,5 @@ class Database {
     
     static var usersReference = Database.database.collection("users")
     static var recipesReference = Database.getUserReference().collection("recipes")
-
+    
 }

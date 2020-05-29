@@ -917,7 +917,7 @@
                                 <rect key="frame" x="0.0" y="122" width="414" height="691"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HpV-5A-lPI">
-                                        <rect key="frame" x="20" y="40" width="372.5" height="534.5"/>
+                                        <rect key="frame" x="20" y="40" width="372.5" height="867"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload a photo for your dish" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGv-sX-lye">
                                                 <rect key="frame" x="0.0" y="0.0" width="259.5" height="22.5"/>
@@ -959,8 +959,22 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYj-a2-X5o">
+                                                <rect key="frame" x="0.0" y="499.5" width="81.5" height="22.5"/>
+                                                <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXT-s3-FhH">
+                                                <rect key="frame" x="0.0" y="542" width="372.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="drh-nD-Xhf">
+                                                <rect key="frame" x="0.0" y="596" width="372.5" height="216"/>
+                                            </pickerView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gt-g7-m6M">
-                                                <rect key="frame" x="0.0" y="499.5" width="372.5" height="35"/>
+                                                <rect key="frame" x="0.0" y="832" width="372.5" height="35"/>
                                                 <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="20"/>
                                                 <state key="normal" title="Create"/>
                                                 <connections>
@@ -971,23 +985,31 @@
                                         <constraints>
                                             <constraint firstItem="1gt-g7-m6M" firstAttribute="leading" secondItem="HpV-5A-lPI" secondAttribute="leading" id="0bB-Es-QfM"/>
                                             <constraint firstItem="Md9-1L-aKi" firstAttribute="top" secondItem="jGv-sX-lye" secondAttribute="bottom" constant="20" id="6GE-FU-29q"/>
+                                            <constraint firstAttribute="trailing" secondItem="eXT-s3-FhH" secondAttribute="trailing" id="AFu-yg-vHX"/>
                                             <constraint firstAttribute="trailing" secondItem="1gt-g7-m6M" secondAttribute="trailing" id="ALW-1T-6LR"/>
                                             <constraint firstItem="Jy1-go-0Lz" firstAttribute="leading" secondItem="HpV-5A-lPI" secondAttribute="leading" id="AgK-2H-uaG"/>
                                             <constraint firstItem="eBC-O6-cdm" firstAttribute="leading" secondItem="HpV-5A-lPI" secondAttribute="leading" id="B10-J3-5tl"/>
                                             <constraint firstAttribute="trailing" secondItem="eBC-O6-cdm" secondAttribute="trailing" id="BVm-a3-xMi"/>
                                             <constraint firstItem="G7f-9z-hXj" firstAttribute="top" secondItem="Jy1-go-0Lz" secondAttribute="bottom" constant="20" id="Cdo-3v-dxG"/>
+                                            <constraint firstAttribute="trailing" secondItem="drh-nD-Xhf" secondAttribute="trailing" id="HRb-Hx-qgk"/>
                                             <constraint firstAttribute="trailing" secondItem="Jy1-go-0Lz" secondAttribute="trailing" id="NRy-1Y-yzd"/>
                                             <constraint firstItem="Jy1-go-0Lz" firstAttribute="top" secondItem="q1L-Sh-x7P" secondAttribute="bottom" constant="20.000000000000011" id="OeF-Rd-gdj"/>
+                                            <constraint firstItem="eXT-s3-FhH" firstAttribute="top" secondItem="wYj-a2-X5o" secondAttribute="bottom" constant="20" id="QDq-pn-qV4"/>
+                                            <constraint firstItem="drh-nD-Xhf" firstAttribute="leading" secondItem="HpV-5A-lPI" secondAttribute="leading" id="UfZ-Bl-0Cg"/>
+                                            <constraint firstItem="wYj-a2-X5o" firstAttribute="leading" secondItem="HpV-5A-lPI" secondAttribute="leading" id="WW4-vL-uE3"/>
+                                            <constraint firstItem="1gt-g7-m6M" firstAttribute="top" secondItem="drh-nD-Xhf" secondAttribute="bottom" constant="20" id="bXN-28-y62"/>
                                             <constraint firstItem="q1L-Sh-x7P" firstAttribute="top" secondItem="Md9-1L-aKi" secondAttribute="bottom" constant="20" id="dn7-au-BVx"/>
-                                            <constraint firstItem="1gt-g7-m6M" firstAttribute="top" secondItem="eBC-O6-cdm" secondAttribute="bottom" constant="20" id="feL-Oe-0jk"/>
                                             <constraint firstItem="eBC-O6-cdm" firstAttribute="top" secondItem="G7f-9z-hXj" secondAttribute="bottom" constant="20" id="hTK-6x-jgq"/>
                                             <constraint firstItem="jGv-sX-lye" firstAttribute="top" secondItem="HpV-5A-lPI" secondAttribute="top" id="o8b-g9-lju"/>
+                                            <constraint firstItem="wYj-a2-X5o" firstAttribute="top" secondItem="eBC-O6-cdm" secondAttribute="bottom" constant="20" id="oyW-Sb-KxP"/>
+                                            <constraint firstItem="drh-nD-Xhf" firstAttribute="top" secondItem="eXT-s3-FhH" secondAttribute="bottom" constant="20" id="vCY-fO-oPd"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="2eB-s3-XgM" firstAttribute="top" secondItem="HpV-5A-lPI" secondAttribute="top" constant="-40" id="JOG-ja-AMj"/>
                                     <constraint firstItem="HpV-5A-lPI" firstAttribute="trailing" secondItem="2eB-s3-XgM" secondAttribute="trailing" constant="20" id="MAX-Wf-IQe"/>
+                                    <constraint firstItem="eXT-s3-FhH" firstAttribute="leading" secondItem="HpV-5A-lPI" secondAttribute="leading" id="Ulv-Uc-6H8"/>
                                     <constraint firstItem="HpV-5A-lPI" firstAttribute="width" secondItem="eap-7d-cTA" secondAttribute="width" multiplier="0.9" id="frB-XZ-dJV"/>
                                     <constraint firstItem="HpV-5A-lPI" firstAttribute="leading" secondItem="2eB-s3-XgM" secondAttribute="leading" constant="20" id="kGi-nT-XZ8"/>
                                     <constraint firstItem="HpV-5A-lPI" firstAttribute="bottom" secondItem="2eB-s3-XgM" secondAttribute="bottom" id="me6-cD-YSi"/>
@@ -1013,6 +1035,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="categoryField" destination="eXT-s3-FhH" id="JRx-Jd-yic"/>
+                        <outlet property="pickerView" destination="drh-nD-Xhf" id="buz-0S-Szq"/>
                         <outlet property="recipeDescription" destination="eBC-O6-cdm" id="Bms-mI-oa3"/>
                         <outlet property="recipeImageView" destination="Md9-1L-aKi" id="gK0-tG-bKK"/>
                         <outlet property="recipeNameField" destination="Jy1-go-0Lz" id="Q63-fm-Xqz"/>

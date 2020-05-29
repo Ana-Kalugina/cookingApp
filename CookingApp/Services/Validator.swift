@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 //swiftlint:disable line_length
 class Validator {
-
+    
     func validate(userName: String, userPassword: String, email: String, repeatPassword: String) -> Bool {
         if userName.isEmpty || userPassword.count < 6 || email.isEmpty || repeatPassword.count < 6 {
             return false
@@ -31,14 +31,14 @@ class Validator {
         }
         return true
     }
-
-    func recipeValidate(recipeName: String, recipeDescription: String, recipePhoto: UIImageView) -> Bool {
-        if recipeName.isEmpty || recipeDescription.isEmpty || recipePhoto.image == UIImage(named: "addImage") {
+    
+    func recipeValidate(recipeName: String, recipeDescription: String, recipePhoto: UIImageView, recipeCategory: String) -> Bool {
+        if recipeName.isEmpty || recipeDescription.isEmpty || recipePhoto.image == UIImage(named: "addImage") || recipeCategory.isEmpty {
             return false
         }
         return true
     }
-
+    
     func loginTextCheck(loginText: String, loginErrorMessage: String?) -> String {
         guard var usernameError = loginErrorMessage else {fatalError()}
         if loginText.isEmpty {
@@ -54,7 +54,7 @@ class Validator {
         }
         return usernameError
     }
-
+    
     func passwordTextCheck(passwordText: String, passwordErrorMessage: String?) -> String {
         guard var passwordErrorText = passwordErrorMessage
             else { fatalError()}
@@ -65,7 +65,7 @@ class Validator {
         }
         return passwordErrorText
     }
-
+    
     func repeatPasswordCheck (passwordText: String, repeatPassword: String, repeatPasswordErrorMessage: String?) -> String {
         guard var passwordErrorText = repeatPasswordErrorMessage else {fatalError()}
         if passwordText != repeatPassword {
@@ -75,7 +75,7 @@ class Validator {
         }
         return passwordErrorText
     }
-
+    
     func emailTextCheck(emailText: String, emailErrorMessage: String?) -> String {
         guard var emailErrorMessage = emailErrorMessage else {fatalError("emailErrorMessage error")}
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"

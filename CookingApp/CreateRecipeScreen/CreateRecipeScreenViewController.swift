@@ -10,7 +10,9 @@ import Firebase
 import JGProgressHUD
 
 class CreateRecipeScreenViewController: UIViewController {
-
+    
+    @IBOutlet weak var categoryField: UITextField!
+    @IBOutlet weak var pickerView: UIPickerView!
     var imagePicker: ImagePicker?
     var activeField: UITextField?
     var activeView: UITextView?
@@ -21,14 +23,18 @@ class CreateRecipeScreenViewController: UIViewController {
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var removeBtn: UIBarButtonItem!
     var color = UIColor(named: "textFieldColor")
-
-
+    var categories = ["pasta", "pizza", "meat", "fish", "vegetable", "sweet", "eggs", "soup", "drinks", "fruits"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        self.pickerView.delegate = self
+        self.pickerView.dataSource = self
         navigationItem.prompt = " "
         recipeNameField.delegate = self
         recipeDescription.delegate = self
+        categoryField.delegate = self
         registerForKeyboardNotifications()
         recipeNameField.backgroundColor = color
         recipeDescription.backgroundColor = color
@@ -41,13 +47,13 @@ class CreateRecipeScreenViewController: UIViewController {
         recipeDescription.translatesAutoresizingMaskIntoConstraints = false
         recipeDescription.sizeToFit()
     }
-
+    
     @objc func changeRecipeImage() {
         self.imagePicker!.present(from: self.view!)
     }
-
+    
     @IBAction func saveButtonPressed(_ sender: Any) {
-        let isValid = Validator().recipeValidate(recipeName: recipeNameField.text ?? "", recipeDescription: recipeDescription.text ?? "", recipePhoto: recipeImageView)
+        let isValid = Validator().recipeValidate(recipeName: recipeNameField.text ?? "", recipeDescription: recipeDescription.text ?? "", recipePhoto: recipeImageView, recipeCategory: categoryField.text ?? "")
         if isValid {
             presentProgressHud()
             addRecipeToStorage()
@@ -55,11 +61,11 @@ class CreateRecipeScreenViewController: UIViewController {
             createAlert(title: "Error", message: "Please do not leave fields blank ", preferredStyle: .alert, alertActionTitle: "Ok")
         }
     }
-
+    
     @IBAction func removeButtonPressed(_ sender: Any) {
         clean()
     }
-
+    
     func addRecipeToStorage() {
         guard let profileImg = self.recipeImageView.image,
             let imageData = profileImg.jpegData(compressionQuality: 1.0) else {
@@ -78,8 +84,8 @@ class CreateRecipeScreenViewController: UIViewController {
                 guard let recipeUrl = url?.absoluteString else {return}
                 guard let recipeName = self.recipeNameField.text else {return}
                 guard let recipeDescription = self.recipeDescription.text else {return}
-                
-                Database.sendDataToDatabase(uid: recipePhotoID, photoUrl: recipeUrl, recipeName: recipeName, recipeDescription: recipeDescription)
+                guard let recipeCategory = self.categoryField.text else {return}
+                Database.sendDataToDatabase(uid: recipePhotoID, photoUrl: recipeUrl, recipeName: recipeName, recipeDescription: recipeDescription, recipeCategory: recipeCategory)
                 self.clean()
                 self.tabBarController?.selectedIndex = 0
             }
@@ -91,14 +97,14 @@ class CreateRecipeScreenViewController: UIViewController {
         self.recipeNameField.text = ""
         self.recipeDescription.text = ""
     }
-
+    
     func presentProgressHud() {
         let progressHud = JGProgressHUD(style: .dark)
         progressHud.textLabel.text = "Loading"
         progressHud.show(in: self.view)
         progressHud.dismiss(afterDelay: 2.0)
     }
-
+    
     func createAlert(title: String, message: String, preferredStyle: UIAlertController.Style, alertActionTitle: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         alert.addAction(UIAlertAction(title: alertActionTitle, style: .default, handler: nil))
@@ -112,18 +118,45 @@ extension CreateRecipeScreenViewController: ImagePickerDelegate {
     }
 }
 
-extension CreateRecipeScreenViewController: UITextFieldDelegate, UITextViewDelegate {
+extension CreateRecipeScreenViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+        
+    }
+    
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        return categories.count
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        self.view.endEditing(true)
+        return categories[row]
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.categoryField.text = self.categories[row]
+        self.pickerView.isHidden = true
+    }
 
+}
+
+extension CreateRecipeScreenViewController: UITextFieldDelegate, UITextViewDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
     }
-
-
+    
+    
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector (keyboardWasShown), name: UIResponder.keyboardDidShowNotification, object: nil)
     }
-
+    
     @objc func keyboardWasShown(notification: NSNotification) {
         guard let activeField = activeField else {return}
         self.scrollView.isScrollEnabled = true
@@ -138,13 +171,26 @@ extension CreateRecipeScreenViewController: UITextFieldDelegate, UITextViewDeleg
             scrollView.scrollRectToVisible(activeField.frame, animated: true)
         }
     }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    
+     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeField = textField
-    }
+        if textField == self.categoryField {
+               self.pickerView.isHidden = false
+               //if you dont want the users to se the keyboard type:
 
+               textField.endEditing(true)
+           }
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeField = nil
     }
 
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
 }

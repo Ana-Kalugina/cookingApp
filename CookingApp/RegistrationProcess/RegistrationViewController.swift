@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 import JGProgressHUD
 class RegistrationViewController: UIViewController {
-
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -25,7 +25,7 @@ class RegistrationViewController: UIViewController {
     var selectedImage: UIImage?
     var activeField: UITextField?
     var imagePicker: ImagePicker?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameField.delegate = self
@@ -42,11 +42,11 @@ class RegistrationViewController: UIViewController {
         profileImage.isUserInteractionEnabled  = true
         profileImage.addGestureRecognizer(tapGesture)
     }
-
+    
     @objc func changeProfileImage(_ sender: Any) {
         self.imagePicker!.present(from: self.view!)
     }
-
+    
     @IBAction func showPasswordPressed(_ sender: UIButton) {
         if sender == showPasswordButton as UIButton {
             if passwordField.isSecureTextEntry == true {
@@ -62,7 +62,7 @@ class RegistrationViewController: UIViewController {
             }
         }
     }
-
+    
     @IBAction func saveButtonPressed(_ sender: Any) {
         view.endEditing(true)
         let isValid = Validator().validate(userName: usernameField.text ?? "", userPassword: passwordField.text ?? "", email: emailField.text ?? "", repeatPassword: repeatPasswordField.text ?? "")
@@ -73,31 +73,31 @@ class RegistrationViewController: UIViewController {
             validateFields()
         }
     }
-
+    
     @IBAction func usernameFieldChanged(_ sender: Any) {
         let loginValidator = Validator()
         loginErrorMessage.isHidden = false
         loginErrorMessage.text = loginValidator.loginTextCheck(loginText: usernameField.text ?? "", loginErrorMessage: loginErrorMessage.text ?? "")
     }
-
+    
     @IBAction func emailFieldChanged(_ sender: Any) {
         let emailValidator = Validator()
         emailErrorMessage.isHidden = false
         emailErrorMessage.text = emailValidator.emailTextCheck(emailText: emailField.text ?? "", emailErrorMessage: emailErrorMessage.text ?? "")
     }
-
+    
     @IBAction func passwordFieldChanged(_ sender: Any) {
         let passwordValidator = Validator()
         passwordErrorMessage.isHidden = false
         passwordErrorMessage.text = passwordValidator.passwordTextCheck(passwordText: passwordField.text ?? "", passwordErrorMessage: passwordErrorMessage.text ?? "")
     }
-
+    
     @IBAction func repeatPasswordFieldChanged(_ sender: Any) {
         let passwordValidator = Validator()
         repeatPasswordMessage.isHidden = false
         repeatPasswordMessage.text = passwordValidator.repeatPasswordCheck(passwordText: passwordField.text ?? "", repeatPassword: repeatPasswordField.text ?? "", repeatPasswordErrorMessage: repeatPasswordMessage.text ?? "")
     }
-
+    
     func validateFields() {
         let validator = Validator()
         loginErrorMessage.isHidden = false
@@ -109,9 +109,9 @@ class RegistrationViewController: UIViewController {
         passwordErrorMessage.text = validator.passwordTextCheck(passwordText: passwordField.text ?? "", passwordErrorMessage: passwordErrorMessage.text ?? "")
         repeatPasswordMessage.text = validator.repeatPasswordCheck(passwordText: passwordField.text ?? "", repeatPassword: repeatPasswordField.text ?? "", repeatPasswordErrorMessage: repeatPasswordMessage.text ?? "")
     }
-
-   ///User Creation
-
+    
+    ///User Creation
+    
     func createUser() {
         let profileManager = ProfileManager.shared
         guard let loginText = usernameField.text else {fatalError()}
@@ -148,20 +148,20 @@ class RegistrationViewController: UIViewController {
             }
         }
     }
-
+    
     func createAlert(title: String, message: String, preferredStyle: UIAlertController.Style, alertActionTitle: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         alert.addAction(UIAlertAction(title: alertActionTitle, style: .default, handler: nil))
         self.present(alert, animated: true)
     }
-
+    
     func presentProgressHud() {
         let progressHud = JGProgressHUD(style: .dark)
         progressHud.textLabel.text = "Loading"
         progressHud.show(in: self.view)
         progressHud.dismiss(afterDelay: 2.0)
     }
-
+    
     func presentTabBar() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let tabbar = (storyboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController) {
@@ -182,11 +182,11 @@ extension RegistrationViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return false
     }
-
+    
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector (keyboardWasShown), name: UIResponder.keyboardDidShowNotification, object: nil)
     }
-
+    
     @objc func keyboardWasShown(notification: NSNotification) {
         guard let activeField = activeField else {return}
         self.scrollView.isScrollEnabled = true
@@ -201,11 +201,11 @@ extension RegistrationViewController: UITextFieldDelegate {
             scrollView.scrollRectToVisible(activeField.frame, animated: true)
         }
     }
-
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeField = textField
     }
-
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeField = nil
     }

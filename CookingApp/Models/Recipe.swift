@@ -15,7 +15,7 @@ class Recipe {
     var recipePhoto: UIImage
     var userName: String?
     var userPhoto: UIImage?
-
+    
     init(recipeName: String, recipeDescription: String, recipePhoto: UIImage) {
         self.recipeName = recipeName
         self.recipeDescription = recipeDescription

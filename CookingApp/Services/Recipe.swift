@@ -13,6 +13,8 @@ class Recipe {
     var recipeName: String
     var recipeDescription: String
     var recipePhoto: UIImage
+    var userName: String?
+    var userPhoto: UIImage?
 
     init(recipeName: String, recipeDescription: String, recipePhoto: UIImage) {
         self.recipeName = recipeName

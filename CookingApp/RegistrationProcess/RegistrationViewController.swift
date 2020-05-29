@@ -173,7 +173,7 @@ class RegistrationViewController: UIViewController {
 
 extension RegistrationViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-        self.profileImage.image = image ?? UIImage(named: "addImage")
+        self.profileImage.image = image ?? UIImage(named: "user")
     }
 }
 

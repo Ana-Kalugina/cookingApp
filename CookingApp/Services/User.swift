@@ -11,7 +11,7 @@ import UIKit
 class User {
     var userName: String
     var userPhoto: UIImage?
-
+    var userId: String?
     init(userName: String) {
         self.userName = userName
     }

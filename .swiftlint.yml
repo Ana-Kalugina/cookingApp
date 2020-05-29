@@ -6,4 +6,4 @@ disabled_rules:
 - vertical_whitespace
 - trailing_newline
 - line_length
-
+- unused_closure_parameter

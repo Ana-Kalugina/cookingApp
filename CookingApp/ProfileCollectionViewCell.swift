@@ -8,7 +8,5 @@
 import UIKit
 
 class ProfileCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var recipeName: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
 }

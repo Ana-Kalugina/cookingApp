@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		04150B34247CBF500028BBBD /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04150B33247CBF500028BBBD /* AuthService.swift */; };
+		044F832824809A1A00B4C9E6 /* RecipeDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F832724809A1A00B4C9E6 /* RecipeDescriptionViewController.swift */; };
+		044F832C2480B20A00B4C9E6 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F832B2480B20A00B4C9E6 /* SearchViewController.swift */; };
 		0455B18E247EE182004F4AA8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455B18D247EE182004F4AA8 /* DatabaseManager.swift */; };
 		048B1BFC247F0F91002D6611 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B1BFB247F0F91002D6611 /* Recipe.swift */; };
 		048B1BFE247F2D28002D6611 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B1BFD247F2D28002D6611 /* User.swift */; };
@@ -36,8 +38,10 @@
 
 /* Begin PBXFileReference section */
 		04150B33247CBF500028BBBD /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		044F832724809A1A00B4C9E6 /* RecipeDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDescriptionViewController.swift; sourceTree = "<group>"; };
+		044F832B2480B20A00B4C9E6 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0455B18D247EE182004F4AA8 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DatabaseManager.swift; path = CookingApp/FeedScreen/DatabaseManager.swift; sourceTree = SOURCE_ROOT; };
-		048B1BFB247F0F91002D6611 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Recipe.swift; path = CookingApp/Services/Recipe.swift; sourceTree = SOURCE_ROOT; };
+		048B1BFB247F0F91002D6611 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Recipe.swift; path = CookingApp/Models/Recipe.swift; sourceTree = SOURCE_ROOT; };
 		048B1BFD247F2D28002D6611 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		04DCDE2B247F5C3200B5FB71 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileCollectionViewCell.swift; path = CookingApp/ProfileCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		04FC09B7247B00F6003359D2 /* CookingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +82,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044F832924809A2200B4C9E6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				048B1BFD247F2D28002D6611 /* User.swift */,
+				048B1BFB247F0F91002D6611 /* Recipe.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		044F832A24809A4100B4C9E6 /* RecipeDescriptionScreen */ = {
+			isa = PBXGroup;
+			children = (
+				044F832724809A1A00B4C9E6 /* RecipeDescriptionViewController.swift */,
+			);
+			path = RecipeDescriptionScreen;
+			sourceTree = "<group>";
+		};
+		044F832E2480B24100B4C9E6 /* SearchRecipeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				044F832B2480B20A00B4C9E6 /* SearchViewController.swift */,
+			);
+			path = SearchRecipeScreen;
+			sourceTree = "<group>";
+		};
 		04FC09AE247B00F6003359D2 = {
 			isa = PBXGroup;
 			children = (
@@ -102,10 +131,13 @@
 				04FC09BA247B00F6003359D2 /* AppDelegate.swift */,
 				04FC09BC247B00F6003359D2 /* SceneDelegate.swift */,
 				04FC09C0247B00F6003359D2 /* Main.storyboard */,
+				044F832924809A2200B4C9E6 /* Models */,
 				04FC09DF247B0A7B003359D2 /* Services */,
 				04FC09E0247B0AAB003359D2 /* WelcomeScreen */,
 				04FC09EA247B159D003359D2 /* RegistrationProcess */,
 				04FC09ED247B2230003359D2 /* FeedScreen */,
+				044F832A24809A4100B4C9E6 /* RecipeDescriptionScreen */,
+				044F832E2480B24100B4C9E6 /* SearchRecipeScreen */,
 				04FC09F4247B2483003359D2 /* CreateRecipeScreen */,
 				04FC09F7247B24D6003359D2 /* ProfileScreen */,
 				04FC09C3247B00FA003359D2 /* Assets.xcassets */,
@@ -119,8 +151,6 @@
 		04FC09DF247B0A7B003359D2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				048B1BFD247F2D28002D6611 /* User.swift */,
-				048B1BFB247F0F91002D6611 /* Recipe.swift */,
 				0455B18D247EE182004F4AA8 /* DatabaseManager.swift */,
 				04FC09DB247B0A67003359D2 /* Validator.swift */,
 				04FC09DD247B0A75003359D2 /* ProfileManager.swift */,
@@ -360,6 +390,8 @@
 				04FC09F6247B24C9003359D2 /* ProfileViewController.swift in Sources */,
 				04DCDE2C247F5C3200B5FB71 /* ProfileCollectionViewCell.swift in Sources */,
 				04150B34247CBF500028BBBD /* AuthService.swift in Sources */,
+				044F832C2480B20A00B4C9E6 /* SearchViewController.swift in Sources */,
+				044F832824809A1A00B4C9E6 /* RecipeDescriptionViewController.swift in Sources */,
 				048B1BFC247F0F91002D6611 /* Recipe.swift in Sources */,
 				04FC09DC247B0A67003359D2 /* Validator.swift in Sources */,
 				04FC09D5247B0513003359D2 /* RegistrationViewController.swift in Sources */,

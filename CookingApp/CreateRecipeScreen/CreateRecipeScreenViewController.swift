@@ -20,6 +20,7 @@ class CreateRecipeScreenViewController: UIViewController {
     @IBOutlet weak var recipeDescription: UITextView!
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var removeBtn: UIBarButtonItem!
+    var color = UIColor(named: "textFieldColor")
 
 
     override func viewDidLoad() {
@@ -29,6 +30,8 @@ class CreateRecipeScreenViewController: UIViewController {
         recipeNameField.delegate = self
         recipeDescription.delegate = self
         registerForKeyboardNotifications()
+        recipeNameField.backgroundColor = color
+        recipeDescription.backgroundColor = color
         recipeDescription.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         recipeDescription.layer.borderWidth = 1
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CreateRecipeScreenViewController.changeRecipeImage))

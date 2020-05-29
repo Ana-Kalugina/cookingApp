@@ -109,6 +109,12 @@ extension RecipesFeedViewController: UICollectionViewDelegate, UICollectionViewD
         return sizeForCells()
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let recipeDescriptionVC = RecipeDescriptionViewController(recipeName: recipes[indexPath.row].recipeName, recipePhoto: recipes[indexPath.row].recipePhoto, recipeDescription: recipes[indexPath.row].recipeDescription)
+        navigationController?.pushViewController(recipeDescriptionVC, animated: true)
+    }
+
     func sizeForCells() -> CGSize {
         if UIDevice.current.orientation.isLandscape {
             sizeForCell = CGSize(width: 260, height: 270)

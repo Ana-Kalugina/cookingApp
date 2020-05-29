@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,7 +36,7 @@
                                 <color key="currentPageIndicatorTintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Color"/>
                         <constraints>
                             <constraint firstItem="Y67-86-1ZQ" firstAttribute="trailing" secondItem="Vkw-4U-DPL" secondAttribute="trailing" constant="20" id="F5F-A0-l4T"/>
                             <constraint firstItem="Vkw-4U-DPL" firstAttribute="top" secondItem="Y67-86-1ZQ" secondAttribute="top" constant="20" id="GRn-ga-EOC"/>
@@ -203,6 +204,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wsf-Cu-kUz">
                                                 <rect key="frame" x="0.0" y="142.5" width="372.5" height="34"/>
+                                                <color key="backgroundColor" name="textFieldColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
@@ -223,6 +225,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UOl-3c-aRN">
                                                 <rect key="frame" x="0.0" y="247" width="372.5" height="34"/>
+                                                <color key="backgroundColor" name="textFieldColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                 <connections>
@@ -265,6 +268,7 @@
                                             </stackView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bx1-ZE-19N">
                                                 <rect key="frame" x="0.0" y="360" width="372.5" height="34"/>
+                                                <color key="backgroundColor" name="textFieldColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <connections>
@@ -307,6 +311,7 @@
                                             </stackView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A3d-EQ-zIT">
                                                 <rect key="frame" x="0.0" y="473" width="372.5" height="34"/>
+                                                <color key="backgroundColor" name="textFieldColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <connections>
@@ -374,7 +379,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="vta-Qx-CM1"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Color"/>
                         <constraints>
                             <constraint firstItem="19O-tx-84K" firstAttribute="leading" secondItem="yro-Jb-RIp" secondAttribute="leading" id="9At-LJ-NJk"/>
                             <constraint firstItem="19O-tx-84K" firstAttribute="top" secondItem="yro-Jb-RIp" secondAttribute="top" id="EYQ-Pg-btX"/>
@@ -499,7 +504,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="yeg-dX-l1S"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Color"/>
                         <constraints>
                             <constraint firstItem="PJe-sB-zV5" firstAttribute="trailing" secondItem="Jfd-Kr-NC0" secondAttribute="trailing" id="RbD-xV-Nrz"/>
                             <constraint firstItem="Jfd-Kr-NC0" firstAttribute="top" secondItem="PJe-sB-zV5" secondAttribute="top" id="as8-ru-0Xn"/>
@@ -552,6 +557,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fyv-lL-Bw1">
                                                 <rect key="frame" x="0.0" y="286" width="372.5" height="34"/>
+                                                <color key="backgroundColor" name="textFieldColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                 <connections>
@@ -594,6 +600,7 @@
                                             </stackView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yob-EH-sTA">
                                                 <rect key="frame" x="0.0" y="398" width="372.5" height="34"/>
+                                                <color key="backgroundColor" name="textFieldColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 <connections>
@@ -650,7 +657,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="t7b-l5-jrt"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Color"/>
                         <constraints>
                             <constraint firstItem="zSj-9J-w4d" firstAttribute="top" secondItem="4mj-9f-f5Y" secondAttribute="top" id="09g-Sl-fLU"/>
                             <constraint firstItem="4mj-9f-f5Y" firstAttribute="bottom" secondItem="zSj-9J-w4d" secondAttribute="bottom" id="7z8-tp-woK"/>
@@ -724,8 +731,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UHs-YN-oz3">
-                                <rect key="frame" x="0.0" y="162" width="414" height="651"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="122" width="414" height="691"/>
+                                <color key="backgroundColor" name="Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rxR-Gh-CFP">
                                     <size key="itemSize" width="300" height="400"/>
                                     <size key="estimatedItemSize" width="300" height="400"/>
@@ -794,11 +801,11 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="Color"/>
                         <constraints>
                             <constraint firstItem="Elp-7Z-gxx" firstAttribute="trailing" secondItem="UHs-YN-oz3" secondAttribute="trailing" id="Erj-fM-C1u"/>
                             <constraint firstItem="Elp-7Z-gxx" firstAttribute="bottom" secondItem="UHs-YN-oz3" secondAttribute="bottom" id="WcZ-TJ-b12"/>
-                            <constraint firstItem="UHs-YN-oz3" firstAttribute="top" secondItem="Elp-7Z-gxx" secondAttribute="top" constant="40" id="vjA-Ov-8Qn"/>
+                            <constraint firstItem="UHs-YN-oz3" firstAttribute="top" secondItem="Elp-7Z-gxx" secondAttribute="top" id="vjA-Ov-8Qn"/>
                             <constraint firstItem="UHs-YN-oz3" firstAttribute="leading" secondItem="Elp-7Z-gxx" secondAttribute="leading" id="wJT-qM-gzK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Elp-7Z-gxx"/>
@@ -816,14 +823,30 @@
         <!--Search-->
         <scene sceneID="8oV-7h-tDZ">
             <objects>
-                <viewController id="SBv-S7-Zlj" sceneMemberID="viewController">
+                <viewController id="SBv-S7-Zlj" customClass="SearchViewController" customModule="CookingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OHr-3y-Fag">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search recipe" translatesAutoresizingMaskIntoConstraints="NO" id="TcW-vq-I6v">
+                                <rect key="frame" x="0.0" y="122" width="414" height="56"/>
+                                <color key="backgroundColor" name="Color"/>
+                                <color key="barTintColor" name="textFieldColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" name="Color"/>
+                        <constraints>
+                            <constraint firstItem="naJ-uv-D3A" firstAttribute="trailing" secondItem="TcW-vq-I6v" secondAttribute="trailing" id="AQh-rg-mjB"/>
+                            <constraint firstItem="TcW-vq-I6v" firstAttribute="leading" secondItem="naJ-uv-D3A" secondAttribute="leading" id="XQv-Uz-AMA"/>
+                            <constraint firstItem="TcW-vq-I6v" firstAttribute="top" secondItem="naJ-uv-D3A" secondAttribute="top" id="cca-u1-VP1"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="naJ-uv-D3A"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search" prompt=" " id="y46-nz-WPC"/>
+                    <connections>
+                        <outlet property="searchBar" destination="TcW-vq-I6v" id="df1-Nv-GE5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vrq-4I-1fN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -920,7 +943,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="eap-7d-cTA"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Color"/>
                         <constraints>
                             <constraint firstItem="5zs-TC-6Pq" firstAttribute="bottom" secondItem="VSn-Ef-Iuw" secondAttribute="bottom" id="QHo-cI-ubS"/>
                             <constraint firstItem="VSn-Ef-Iuw" firstAttribute="leading" secondItem="5zs-TC-6Pq" secondAttribute="leading" id="cpD-Dp-cAn"/>
@@ -955,7 +978,7 @@
                     <view key="view" contentMode="scaleToFill" id="LSs-7e-bgG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Color"/>
                         <viewLayoutGuide key="safeArea" id="wTF-Yk-bYD"/>
                     </view>
                     <navigationItem key="navigationItem" title="ShoppingList" prompt=" " id="Fma-7d-hT8"/>
@@ -1015,7 +1038,7 @@
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qq5-Wj-5pb">
                                 <rect key="frame" x="30" y="313" width="354" height="500"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="3UD-ay-7pR">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="estimatedItemSize" width="150" height="150"/>
@@ -1053,7 +1076,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" name="Color"/>
                         <constraints>
                             <constraint firstItem="2ri-Em-nhX" firstAttribute="trailing" secondItem="FQG-j7-P40" secondAttribute="trailing" constant="20" id="2pk-ID-TvG"/>
                             <constraint firstItem="2ri-Em-nhX" firstAttribute="bottom" secondItem="Qq5-Wj-5pb" secondAttribute="bottom" id="HMA-YF-ZaE"/>
@@ -1095,5 +1118,11 @@
         <image name="plus.app.fill" catalog="system" width="128" height="114"/>
         <image name="power" catalog="system" width="128" height="124"/>
         <image name="user" width="512" height="512"/>
+        <namedColor name="Color">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textFieldColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

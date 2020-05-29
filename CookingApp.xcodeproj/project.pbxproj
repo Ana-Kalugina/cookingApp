@@ -13,6 +13,7 @@
 		0455B18E247EE182004F4AA8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455B18D247EE182004F4AA8 /* DatabaseManager.swift */; };
 		048B1BFC247F0F91002D6611 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B1BFB247F0F91002D6611 /* Recipe.swift */; };
 		048B1BFE247F2D28002D6611 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B1BFD247F2D28002D6611 /* User.swift */; };
+		04ACD9F32480C57E00554982 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACD9F22480C57E00554982 /* SearchCollectionViewCell.swift */; };
 		04DCDE2C247F5C3200B5FB71 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DCDE2B247F5C3200B5FB71 /* ProfileCollectionViewCell.swift */; };
 		04FC09BB247B00F6003359D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC09BA247B00F6003359D2 /* AppDelegate.swift */; };
 		04FC09BD247B00F6003359D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC09BC247B00F6003359D2 /* SceneDelegate.swift */; };
@@ -43,6 +44,7 @@
 		0455B18D247EE182004F4AA8 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DatabaseManager.swift; path = CookingApp/FeedScreen/DatabaseManager.swift; sourceTree = SOURCE_ROOT; };
 		048B1BFB247F0F91002D6611 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Recipe.swift; path = CookingApp/Models/Recipe.swift; sourceTree = SOURCE_ROOT; };
 		048B1BFD247F2D28002D6611 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		04ACD9F22480C57E00554982 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		04DCDE2B247F5C3200B5FB71 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileCollectionViewCell.swift; path = CookingApp/ProfileCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		04FC09B7247B00F6003359D2 /* CookingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04FC09BA247B00F6003359D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				044F832B2480B20A00B4C9E6 /* SearchViewController.swift */,
+				04ACD9F22480C57E00554982 /* SearchCollectionViewCell.swift */,
 			);
 			path = SearchRecipeScreen;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 			files = (
 				04FC09E4247B1088003359D2 /* LoginViewController.swift in Sources */,
 				04FC09CF247B0153003359D2 /* WelcomeViewController.swift in Sources */,
+				04ACD9F32480C57E00554982 /* SearchCollectionViewCell.swift in Sources */,
 				04FC09BB247B00F6003359D2 /* AppDelegate.swift in Sources */,
 				04FC09F3247B245E003359D2 /* ImagePicker.swift in Sources */,
 				0455B18E247EE182004F4AA8 /* DatabaseManager.swift in Sources */,

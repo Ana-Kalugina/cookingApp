@@ -29,6 +29,13 @@ class ProfileViewController: UIViewController {
         getUser()
     }
     
+    @IBAction func segmentedControlSwitched(_ sender: Any) {
+        if segmentedControl.isEnabledForSegment(at: 1) {
+            tabBarController?.selectedIndex = 2
+            segmentedControl.selectedSegmentIndex = 0
+        }
+    }
+    
     @IBAction func signOutBtnPressed(_ sender: Any) {
         let profileManager = ProfileManager.shared
         let firebaseAuth = Auth.auth()

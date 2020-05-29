@@ -77,9 +77,6 @@ class RecipesFeedViewController: UIViewController {
                         recipe.userPhoto = self.usersPhotos[doc]
                         recipe.userName = self.usersNames[doc]
                         self.recipes.insert(recipe, at: 0)
-                       // self.recipes.append(recipe)
-                        print(self.recipes.count)
-                        //self.collectionView.reloadData()
                     }
                     self.collectionView.reloadData()
                 }

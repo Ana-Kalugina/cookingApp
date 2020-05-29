@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 import JGProgressHUD
-//swiftlint:disable all
+
 class CreateRecipeScreenViewController: UIViewController {
 
     var imagePicker: ImagePicker?
@@ -51,8 +51,7 @@ class CreateRecipeScreenViewController: UIViewController {
         if isValid {
             presentProgressHud()
             addRecipeToStorage()
-        }
-        else {
+        } else {
             createAlert(title: "Error", message: "Please do not leave fields blank ", preferredStyle: .alert, alertActionTitle: "Ok")
         }
     }
@@ -80,7 +79,7 @@ class CreateRecipeScreenViewController: UIViewController {
                 guard let recipeName = self.recipeNameField.text else {return}
                 guard let recipeDescription = self.recipeDescription.text else {return}
                 
-                Database.sendDataToDatabase(uid:recipePhotoID, photoUrl: recipeUrl, recipeName: recipeName, recipeDescription: recipeDescription)
+                Database.sendDataToDatabase(uid: recipePhotoID, photoUrl: recipeUrl, recipeName: recipeName, recipeDescription: recipeDescription)
                 self.clean()
                 self.tabBarController?.selectedIndex = 0
             }
